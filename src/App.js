@@ -5,7 +5,7 @@ import { CssBaseline, ThemeProvider, Typography } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import { themeSettings } from "./theme";
 import useOnline from "utils/useOnline";
-import HomePage from "scenes/HomePage/HomePage";
+import HomePage from "scenes/homePage/HomePage";
 import LoginPage from "scenes/loginPage/LoginPage";
 import ProfilePage from "scenes/profilePage/ProfilePage";
 import ForgotPassword from "scenes/ForgotPassword/ForgotPassword";
