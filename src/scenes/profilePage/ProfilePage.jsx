@@ -51,7 +51,7 @@ const ProfilePage = () => {
   };
 
   const createConverStation = async (friendId) => {
-    const { data } = await axios.post(`${process.env.REACT_APP_BASE_URL}/converstations`, { friendId }, {
+    const { data } = await axios.post(`https://safeer.tk/converstations`, { friendId }, {
         headers: {
             "Content-Type": "application/json",
             'Authorization': `Bearer ${token}`,

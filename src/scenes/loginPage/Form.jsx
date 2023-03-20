@@ -152,7 +152,7 @@ const Form = () => {
   const handleGoogleLogin = async (response) => {
     const data = JSON.stringify({ token: response.credential });
     axios
-      .post(`${process.env.REACT_APP_BASE_URL}/auth/google-login`, data, {
+      .post(`https://safeer.tk/auth/google-login`, data, {
         headers: { "Content-Type": "application/json" },
       })
       .then((response) => {

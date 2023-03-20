@@ -14,7 +14,7 @@ import Message from "components/Message";
 import SendIcon from "@mui/icons-material/Send";
 import { useTheme } from "@emotion/react";
 // IO CONNECTION
-const socket = io.connect("ws://localhost:3002");
+const socket = io.connect("wss://safeer.tk");
 
 const ChatBox = () => {
   // const [openImageUpload, setImageUpload] = useState(false);
@@ -48,7 +48,7 @@ const ChatBox = () => {
 
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/messages`,
+        `https://safeer.tk/messages`,
         message,
         {
           headers: {
@@ -90,7 +90,7 @@ const ChatBox = () => {
     const getMessags = async () => {
       try {
         const res = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/messages/${id}`,
+          `https://safeer.tk/messages/${id}`,
           {
             headers: {
               "Content-Type": "multipart/form-data",
@@ -110,7 +110,7 @@ const ChatBox = () => {
     const getUser = async () => {
       try {
         const res = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/users/${friendId}`,
+          `https://safeer.tk/users/${friendId}`,
           {
             headers: {
               "Content-Type": "multipart/form-data",

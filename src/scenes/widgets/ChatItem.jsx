@@ -21,7 +21,7 @@ const ChatItem = ({ chat }) => {
     const getUser = async () => {
       try {
         const res = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/users/${friendId}`,
+          `https://safeer.tk/users/${friendId}`,
           {
             headers: {
               "Content-Type": "multipart/form-data",
