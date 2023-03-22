@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import ChatItem from "./ChatItem";
 import WidgetWrapper from "components/WidgetWrapper";
 import axios from "axios";
+import config from "utils/config";
+
 
 const ChatList = () => {
   const [converstations, setConverstations] = useState([]);
