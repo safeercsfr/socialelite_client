@@ -1,3 +1,5 @@
-export default { 
-  SERVER_URL: 'https://safeer.tk', 
-} 
+const config = {
+  SERVER_URL: 'https://safeer.tk',
+};
+
+export default config;

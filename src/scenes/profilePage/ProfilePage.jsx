@@ -1,7 +1,7 @@
-import { Box, Button, useMediaQuery } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Navbar from "scenes/navbar/Navbar";
 import FriendListWidget from "scenes/widgets/FriendListWidget";
 import MyPostWidget from "scenes/widgets/MyPostWidget";
@@ -12,7 +12,6 @@ import { setIsEditing } from "state/authSlice";
 import UserEdit from "scenes/widgets/UserEdit";
 import { toast, Toaster } from "react-hot-toast";
 import { setUserData } from "state/authSlice";
-import axios from "axios";
 
 const ProfilePage = () => {
   const isEditing = useSelector((state) => state?.isEditing);
@@ -20,12 +19,9 @@ const ProfilePage = () => {
   const [friendDetails, setFriendDetails] = useState({});
   const dispatch = useDispatch();
   const { userId } = useParams();
-  const navigate = useNavigate();
   const token = useSelector((state) => state?.token);
   const user = useSelector((state) => state?.user);
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
-
-
 
   const getFriendData = async () => {
     try {
@@ -49,19 +45,6 @@ const ProfilePage = () => {
       console.error(err);
     }
   };
-
-  const createConverStation = async (friendId) => {
-    const { data } = await axios.post(`https://safeer.tk/converstations`, { friendId }, {
-        headers: {
-            "Content-Type": "application/json",
-            'Authorization': `Bearer ${token}`,
-        },
-    })
-
-    if(data){
-      navigate(`/message`);
-    }
-}
 
   useEffect(() => {
     if (userId !== user?._id) {
@@ -126,7 +109,6 @@ const ProfilePage = () => {
         )}
       </Box>
       <Toaster />
-      {friendData ? <Button sx={{ margin: "1rem" }} onClick={() => createConverStation(userId)} variant='contained' size='small' >Message</Button> : ''}
     </Box>
   );
 };

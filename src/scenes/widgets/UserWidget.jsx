@@ -6,8 +6,9 @@ import WidgetWrapper from "components/WidgetWrapper";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getDataAPI, patchDataAPI } from "utils/fetchData";
+import { getDataAPI, postDataAPI } from "utils/fetchData";
 import { setIsEditing } from "state/authSlice";
+import Friend from "components/Friend";
 
 const UserWidget = ({
   userId,
@@ -28,22 +29,11 @@ const UserWidget = ({
   const dispatch = useDispatch();
   const { userId: friendId } = useParams();
 
-  const followings = useSelector((state) => state?.user?.followings);
-  const [isFriend, setIsFriend] = useState(
-    followings?.find((friend) => friend?._id === friendId)
-  );
+  const createConverStation = async (friendId) => {
+    const { data } = await postDataAPI(`/converstations`, { friendId },token );
 
-  const patchFriend = async () => {
-    try {
-      const { data } = await patchDataAPI(
-        `/users/${user?._id}/${friendId}`,
-        {},
-        token
-      );
-      // dispatch(setFriends({ friends: data }));
-      setIsFriend(!isFriend);
-    } catch (error) {
-      console.error(error);
+    if (data) {
+      navigate(`/message`);
     }
   };
 
@@ -101,15 +91,6 @@ const UserWidget = ({
             >
               {isFriendData ? friendData?.user?.username : username}
             </Typography>
-            {isFriendData && (
-              <Box>
-                {isFriend ? (
-                  <Button onClick={() => patchFriend()}>Unfollow</Button>
-                ) : (
-                  <Button onClick={() => patchFriend()}>Follow</Button>
-                )}
-              </Box>
-            )}
           </Box>
         </FlexBetween>
         {isEditUser && (
@@ -181,6 +162,12 @@ const UserWidget = ({
           </Typography>
         </FlexBetween>
       </Box>
+      {isFriendData && (
+        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Button onClick={() => createConverStation(friendId)}>Message</Button>
+          <Friend friendId={friendId} userImage={false} />
+        </Box>
+      )}
     </WidgetWrapper>
   );
 };

@@ -20,6 +20,7 @@ const Friend = ({
   userPicturePath,
   postId,
   isFriendData,
+  userImage=true,
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -57,25 +58,6 @@ const Friend = ({
         token
       );
 
-      // const formattedFollowingsData = data.formattedFollowings.map(
-      //   ({ id }) => id
-      // );
-      // const formattedFollowersData = data.formattedFollowers.map(
-      //   ({ id }) => id
-      // );
-
-      // if (isEqual(formattedFollowingsData, formattedFollowersData)) {
-      //   dispatch(setFollowings({ followings: data.formattedFollowings }));
-      //   dispatch(setFollowers({ followers: [] }));
-      //   dispatch(setSuggestions({ suggestions: data.suggestions }));
-
-      // } else {
-      //   dispatch(setFollowings({ followings: data.formattedFollowings }));
-      //   dispatch(setFollowers({ followers: data.formattedFollowers }));
-      //   dispatch(setSuggestions({ suggestions: data.suggestions }));
-
-      // }
-
       dispatch(setFollowings({ followings: data?.formattedFollowings }));
       dispatch(setFollowers({ followers: data?.formattedFollowers }));
       dispatch(setSuggestions({ suggestions: data?.suggestions }));
@@ -107,7 +89,7 @@ const Friend = ({
   return (
     <FlexBetween>
       <FlexBetween gap="1rem">
-        <UserImage image={userPicturePath} size="55px" />
+        {userImage && <UserImage image={userPicturePath} size="55px" />}
         <Box
           onClick={() => {
             navigate(`/profile/${friendId}`);

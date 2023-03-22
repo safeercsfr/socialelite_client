@@ -13,6 +13,7 @@ import io from "socket.io-client";
 import Message from "components/Message";
 import SendIcon from "@mui/icons-material/Send";
 import { useTheme } from "@emotion/react";
+import config from "utils/config";
 // IO CONNECTION
 const socket = io.connect("wss://safeer.tk");
 
@@ -48,7 +49,7 @@ const ChatBox = () => {
 
     try {
       const res = await axios.post(
-        `https://safeer.tk/messages`,
+        `${config.SERVER_URL}/messages`,
         message,
         {
           headers: {
@@ -90,7 +91,7 @@ const ChatBox = () => {
     const getMessags = async () => {
       try {
         const res = await axios.get(
-          `https://safeer.tk/messages/${id}`,
+          `${config.SERVER_URL}/messages/${id}`,
           {
             headers: {
               "Content-Type": "multipart/form-data",
@@ -110,7 +111,7 @@ const ChatBox = () => {
     const getUser = async () => {
       try {
         const res = await axios.get(
-          `https://safeer.tk/users/${friendId}`,
+          `${config.SERVER_URL}/users/${friendId}`,
           {
             headers: {
               "Content-Type": "multipart/form-data",

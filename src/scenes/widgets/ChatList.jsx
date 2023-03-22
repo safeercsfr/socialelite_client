@@ -16,7 +16,7 @@ const ChatList = () => {
     const getConverstations = async () => {
       try {
         const res = await axios.get(
-          `https://safeer.tk/converstations/${userId}`,
+          `${config.SERVER_URL}/converstations/${userId}`,
           {
             headers: {
               "Content-Type": "multipart/form-data",
